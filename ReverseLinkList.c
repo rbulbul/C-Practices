@@ -1,6 +1,3 @@
-// ReverseLinkList.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -56,7 +53,7 @@ char *createName(void)
 	int nameLength;
 
 	printf("Please type a name up to 30 char\n");
-	scanf_s("%s", buffer);
+	scanf("%s", buffer);
 	nameLength = ft_strlen(buffer) + 1;
 	name = (char *)malloc(nameLength);
 	ft_strlcpy(name, buffer, nameLength);
@@ -69,7 +66,7 @@ int askAgeToUser(void)
 	int personAge;
 
 	printf("Please type the age of person:\n");
-	scanf_s("%d", &personAge);
+	scanf("%d", &personAge);
 	return personAge;
 }
 
@@ -82,15 +79,30 @@ void printLinkList(node *list)
 		list = list->next;
 	}
 }
+void printReverseLinkList(node *list)
+{
+	node *prev = NULL;
+	node *current = list;
+	node *next = NULL;
+	while (current != NULL)
+	{
+		next = current->next;
+		current->next = prev;
+		prev = current;
+		current = next;
+	}
+	list = prev;
+	printLinkList(list);
+}
 
-int main()
+int main(void)
 {
 	node *headNode = NULL;
 	node *temp = NULL;
 	int length;
 
 	printf("Type the amount of list\n");
-	scanf_s("%d", &length);
+	scanf("%d", &length);
 
 	for (int i = 0; i < length; i++)
 	{
@@ -110,16 +122,9 @@ int main()
 	temp->next = NULL;
 	temp = headNode;
 
+	printf("******** Printing created link list.. ********");
 	printLinkList(temp);
+	printf("******** Printing reverse version of created link list.. ********");
+	printReverseLinkList(temp);
+	return 0;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started:
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
