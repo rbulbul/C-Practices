@@ -10,11 +10,11 @@ typedef struct node
 	char *name;
 	int age;
 	struct node *next;
-}node;
+} node;
 
-size_t	ft_strlen(const char* s)
+size_t ft_strlen(const char *s)
 {
-	size_t	counter;
+	size_t counter;
 
 	counter = 0;
 	while (s[counter] != '\0')
@@ -22,10 +22,10 @@ size_t	ft_strlen(const char* s)
 	return (counter);
 }
 
-size_t	ft_strlcpy(char* dst, const char* src, size_t dssize)
+size_t ft_strlcpy(char *dst, const char *src, size_t dssize)
 {
-	size_t	i;
-	int		src_len;
+	size_t i;
+	int src_len;
 
 	src_len = ft_strlen(src);
 	if (!dssize || !src)
@@ -40,7 +40,7 @@ size_t	ft_strlcpy(char* dst, const char* src, size_t dssize)
 	return (src_len);
 }
 
-void printList(node* n)
+void printList(node *n)
 {
 	while (n != NULL)
 	{
@@ -58,10 +58,19 @@ char *createName(void)
 	printf("Please type a name up to 30 char\n");
 	scanf_s("%s", buffer);
 	nameLength = ft_strlen(buffer) + 1;
-	name = (char*)malloc(nameLength);
+	name = (char *)malloc(nameLength);
 	ft_strlcpy(name, buffer, nameLength);
-	//printf("Your name is %s\n", name);
+	// printf("Your name is %s\n", name);
 	return name;
+}
+
+int askAgeToUser(void)
+{
+	int personAge;
+
+	printf("Please type the age of person:\n");
+	scanf_s("%d", &personAge);
+	return personAge;
 }
 
 void printLinkList(node *list)
@@ -74,22 +83,20 @@ void printLinkList(node *list)
 	}
 }
 
-
-
 int main()
 {
-	node	*headNode = NULL;
-	node	*temp = NULL;
-	int		length;
+	node *headNode = NULL;
+	node *temp = NULL;
+	int length;
 
 	printf("Type the amount of list\n");
 	scanf_s("%d", &length);
 
 	for (int i = 0; i < length; i++)
 	{
-		node* currentNode = (node*)malloc(sizeof(node));
+		node *currentNode = (node *)malloc(sizeof(node));
 		currentNode->name = createName();
-		currentNode->age = 15;
+		currentNode->age = askAgeToUser();
 		if (i == 0)
 		{
 			headNode = temp = currentNode;
@@ -104,13 +111,12 @@ int main()
 	temp = headNode;
 
 	printLinkList(temp);
-
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
 
-// Tips for Getting Started: 
+// Tips for Getting Started:
 //   1. Use the Solution Explorer window to add/manage files
 //   2. Use the Team Explorer window to connect to source control
 //   3. Use the Output window to see build output and other messages
