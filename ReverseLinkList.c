@@ -57,7 +57,6 @@ char *createName(void)
 	nameLength = ft_strlen(buffer) + 1;
 	name = (char *)malloc(nameLength);
 	ft_strlcpy(name, buffer, nameLength);
-	// printf("Your name is %s\n", name);
 	return name;
 }
 
